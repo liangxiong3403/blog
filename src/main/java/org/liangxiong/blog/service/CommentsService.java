@@ -5,6 +5,10 @@ import com.blade.jdbc.model.Paginator;
 import org.liangxiong.blog.dto.Comment;
 import org.liangxiong.blog.model.Comments;
 
+/**
+ * @author liangxiong
+ * @Description
+ */
 public interface CommentsService {
 
     /**
@@ -16,6 +20,7 @@ public interface CommentsService {
 
     /**
      * 删除评论，暂时没用
+     *
      * @param coid
      * @param cid
      * @throws Exception
@@ -24,6 +29,7 @@ public interface CommentsService {
 
     /**
      * 获取文章下的评论
+     *
      * @param cid
      * @param page
      * @param limit
@@ -33,6 +39,7 @@ public interface CommentsService {
 
     /**
      * 分页管理评论
+     *
      * @param take
      * @return
      */
@@ -40,6 +47,7 @@ public interface CommentsService {
 
     /**
      * 根据主键查询评论
+     *
      * @param coid
      * @return
      */
@@ -47,6 +55,7 @@ public interface CommentsService {
 
     /**
      * 更新评论状态
+     *
      * @param comments
      */
     void update(Comments comments);

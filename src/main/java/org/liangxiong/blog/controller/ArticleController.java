@@ -1,4 +1,4 @@
-package org.liangxiong.blog.controller.admin;
+package org.liangxiong.blog.controller;
 
 import com.blade.ioc.annotation.Inject;
 import com.blade.jdbc.core.Take;
@@ -8,7 +8,6 @@ import com.blade.mvc.annotation.*;
 import com.blade.mvc.http.HttpMethod;
 import com.blade.mvc.http.Request;
 import com.blade.mvc.view.RestResponse;
-import org.liangxiong.blog.controller.BaseController;
 import org.liangxiong.blog.dto.LogActions;
 import org.liangxiong.blog.dto.Types;
 import org.liangxiong.blog.exception.TipException;
@@ -25,8 +24,8 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 
 /**
- * 文章管理控制器
- * Created by biezhi on 2017/2/21.
+ * @author liangxiong
+ * @Description 文章管理控制器
  */
 @Controller("admin/article")
 public class ArticleController extends BaseController {
@@ -47,6 +46,7 @@ public class ArticleController extends BaseController {
 
     /**
      * 文章管理首页
+     *
      * @param page
      * @param limit
      * @param request
@@ -63,6 +63,7 @@ public class ArticleController extends BaseController {
 
     /**
      * 文章发布页面
+     *
      * @param request
      * @return
      */
@@ -75,6 +76,7 @@ public class ArticleController extends BaseController {
 
     /**
      * 文章编辑页面
+     *
      * @param cid
      * @param request
      * @return
@@ -216,7 +218,7 @@ public class ArticleController extends BaseController {
         try {
             contentsService.delete(cid);
             siteService.cleanCache(Types.C_STATISTICS);
-            logService.save(LogActions.DEL_ARTICLE, cid+"", request.address(), this.getUid());
+            logService.save(LogActions.DEL_ARTICLE, cid + "", request.address(), this.getUid());
         } catch (Exception e) {
             String msg = "文章删除失败";
             if (e instanceof TipException) {

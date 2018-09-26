@@ -5,7 +5,8 @@ import com.blade.jdbc.model.Paginator;
 import org.liangxiong.blog.model.Attach;
 
 /**
- * Created by biezhi on 2017/2/23.
+ * @author liangxiong
+ * @Description
  */
 public interface AttachService {
 
@@ -21,12 +22,14 @@ public interface AttachService {
 
     /**
      * 删除附件
+     *
      * @param id
      */
     void delete(Integer id);
 
     /**
      * 分页查询附件
+     *
      * @param take
      * @return
      */
@@ -34,6 +37,7 @@ public interface AttachService {
 
     /**
      * 根据附件id查询附件
+     *
      * @param id
      * @return
      */

@@ -5,12 +5,14 @@ import org.liangxiong.blog.model.Logs;
 import java.util.List;
 
 /**
- * Created by biezhi on 2017/2/26.
+ * @author liangxiong
+ * @Description
  */
 public interface LogService {
 
     /**
      * 记录日志
+     *
      * @param action
      * @param data
      * @param ip
@@ -20,6 +22,7 @@ public interface LogService {
 
     /**
      * 读取日志
+     *
      * @param page
      * @param limit
      * @return

@@ -1,6 +1,11 @@
 #include('./header.html',{has_sub:'other', active:'page', title:'页面管理'})
+<style>
+    table thead tr th {
+        text-align: center
+    }
+</style>
 <div class="row">
-    <div class="col-sm-12">
+    <div class="col-sm-12" align="center">
         <h4 class="page-title">文章管理</h4>
     </div>
     <div class="col-md-12">
@@ -13,13 +18,13 @@
                 <th>页面名称</th>
                 <th>页面路径</th>
                 <th width="20%">发布时间</th>
-                <th width="12%">发布状态</th>
-                <th>操作</th>
+                <th width="10%">发布状态</th>
+                <th width="20%">操作</th>
             </tr>
             </thead>
             <tbody>
             #for(post : articles.list)
-            <tr cid="${post.cid}">
+            <tr cid="${post.cid}" align="center">
                 <td>${post.title}</td>
                 <td>${post.slug}</td>
                 <td>${fmtdate(post.created, 'yyyy-MM-dd HH:mm:ss')}</td>
@@ -33,9 +38,11 @@
                 <td>
                     <a href="/admin/page/${post.cid}" class="btn btn-primary btn-sm waves-effect waves-light m-b-5"><i
                             class="fa fa-edit"></i> <span>编辑</span></a>
+                    &nbsp;
                     <a href="javascript:void(0)" onclick="delPost(${post.cid});"
                        class="btn btn-danger btn-sm waves-effect waves-light m-b-5"><i
                             class="fa fa-trash-o"></i> <span>删除</span></a>
+                    &nbsp;
                     <a class="btn btn-warning btn-sm waves-effect waves-light m-b-5" href="/${post.slug}"
                        target="_blank"><i
                             class="fa fa-rocket"></i> <span>预览</span></a>
@@ -51,15 +58,16 @@
 
 <script type="text/javascript">
     var tale = new $.tale();
+
     function delPost(cid) {
         tale.alertConfirm({
-            title:'确定删除这个页面吗?',
+            title: '确定删除这个页面吗?',
             then: function () {
                 tale.post({
-                    url : '/admin/page/delete',
+                    url: '/admin/page/delete',
                     data: {cid: cid},
                     success: function (result) {
-                        if(result && result.success){
+                        if (result && result.success) {
                             tale.alertOkAndReload('页面删除成功');
                         } else {
                             tale.alertError(result.msg || '页面删除失败');

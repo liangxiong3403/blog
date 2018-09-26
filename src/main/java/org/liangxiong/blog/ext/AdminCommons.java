@@ -5,9 +5,8 @@ import com.blade.kit.Tools;
 import org.liangxiong.blog.model.Metas;
 
 /**
- * 后台公共函数
- * <p>
- * Created by biezhi on 2017/2/21.
+ * @author liangxiong
+ * @Description 后台公共函数
  */
 public final class AdminCommons {
 

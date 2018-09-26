@@ -10,7 +10,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Tool to run database scripts
+ * @author liangxiong
+ * @Description 初始化项目时执行脚本
  */
 public class ScriptRunner {
 

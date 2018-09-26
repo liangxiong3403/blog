@@ -1,17 +1,16 @@
 package org.liangxiong.blog.service;
 
 import com.blade.jdbc.model.Paginator;
+import org.liangxiong.blog.dto.*;
 import org.liangxiong.blog.model.Comments;
 import org.liangxiong.blog.model.Contents;
 import org.liangxiong.blog.model.Users;
-import org.liangxiong.blog.dto.*;
 
 import java.util.List;
 
 /**
- * 站点服务
- *
- * Created by biezhi on 2017/2/23.
+ * @author liangxiong
+ * @Description
  */
 public interface SiteService {
 
@@ -56,6 +55,7 @@ public interface SiteService {
 
     /**
      * 查询一条评论
+     *
      * @param coid
      * @return
      */
@@ -63,6 +63,7 @@ public interface SiteService {
 
     /**
      * 系统备份
+     *
      * @param bk_type
      * @param bk_path
      * @param fmt
@@ -72,12 +73,14 @@ public interface SiteService {
 
     /**
      * 获取分类/标签列表
+     *
      * @return
      */
     List<MetaDto> getMetas(String seachType, String type, int limit);
 
     /**
      * 清楚缓存
+     *
      * @param key
      */
     void cleanCache(String key);
@@ -85,14 +88,15 @@ public interface SiteService {
     /**
      * 获取相邻的文章
      *
-     * @param type  上一篇:prev 下一篇:next
-     * @param cid   当前文章id
+     * @param type 上一篇:prev 下一篇:next
+     * @param cid  当前文章id
      * @return
      */
     Contents getNhContent(String type, Integer cid);
 
     /**
      * 获取文章的评论
+     *
      * @param cid
      * @param page
      * @param limit

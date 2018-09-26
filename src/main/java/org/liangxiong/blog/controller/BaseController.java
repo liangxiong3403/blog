@@ -6,7 +6,8 @@ import org.liangxiong.blog.utils.MapCache;
 import org.liangxiong.blog.utils.TaleUtils;
 
 /**
- * Created by biezhi on 2017/2/21.
+ * @author liangxiong
+ * @Description 基础Controller
  */
 public abstract class BaseController {
 
@@ -32,7 +33,7 @@ public abstract class BaseController {
         return TaleUtils.getLoginUser();
     }
 
-    public Integer getUid(){
+    public Integer getUid() {
         return this.user().getUid();
     }
 

@@ -9,9 +9,8 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Tale 常量存储
- *
- * @author biezhi
+ * @author liangxiong
+ * @Description 常量
  */
 public class TaleConst {
 

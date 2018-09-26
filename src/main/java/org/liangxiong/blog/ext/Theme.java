@@ -2,6 +2,7 @@ package org.liangxiong.blog.ext;
 
 import com.blade.jdbc.model.Paginator;
 import com.blade.kit.StringKit;
+import jetbrick.template.runtime.InterpretContext;
 import org.liangxiong.blog.dto.Comment;
 import org.liangxiong.blog.dto.MetaDto;
 import org.liangxiong.blog.dto.Types;
@@ -10,7 +11,6 @@ import org.liangxiong.blog.model.Comments;
 import org.liangxiong.blog.model.Contents;
 import org.liangxiong.blog.service.SiteService;
 import org.liangxiong.blog.utils.TaleUtils;
-import jetbrick.template.runtime.InterpretContext;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -18,9 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 主题函数
- * <p>
- * Created by biezhi on 2017/2/28.
+ * @author liangxiong
+ * @Description 主题函数
  */
 public final class Theme {
 
@@ -34,12 +33,13 @@ public final class Theme {
 
     /**
      * 获取header keywords
+     *
      * @return
      */
-    public static String meta_keywords(){
+    public static String meta_keywords() {
         InterpretContext ctx = InterpretContext.current();
         Object value = ctx.getValueStack().getValue("keywords");
-        if(null != value){
+        if (null != value) {
             return value.toString();
         }
         return Commons.site_option("site_keywords");
@@ -47,12 +47,13 @@ public final class Theme {
 
     /**
      * 获取header description
+     *
      * @return
      */
-    public static String meta_description(){
+    public static String meta_description() {
         InterpretContext ctx = InterpretContext.current();
         Object value = ctx.getValueStack().getValue("description");
-        if(null != value){
+        if (null != value) {
             return value.toString();
         }
         return Commons.site_option("site_description");
@@ -60,14 +61,15 @@ public final class Theme {
 
     /**
      * header title
+     *
      * @return
      */
-    public static String head_title(){
+    public static String head_title() {
         InterpretContext ctx = InterpretContext.current();
         Object value = ctx.getValueStack().getValue("title");
 
         String p = "首页";
-        if(null != value){
+        if (null != value) {
             p = value.toString();
         }
         return p + " - " + Commons.site_option("site_title", "Tale 博客");
@@ -194,9 +196,10 @@ public final class Theme {
 
     /**
      * 显示文章浏览量
+     *
      * @return
      */
-    public static String views(){
+    public static String views() {
         Contents contents = current_article();
         return null != contents ? contents.getHits().toString() : "0";
     }
@@ -222,15 +225,17 @@ public final class Theme {
 
     /**
      * 获取文章摘要
+     *
      * @param len
      * @return
      */
-    public static String excerpt(int len){
+    public static String excerpt(int len) {
         return intro(len);
     }
 
     /**
      * 获取文章摘要
+     *
      * @param len
      * @return
      */
@@ -299,9 +304,10 @@ public final class Theme {
 
     /**
      * 获取当前文章的下一篇
+     *
      * @return
      */
-    public static Contents article_next(){
+    public static Contents article_next() {
         Contents cur = current_article();
         return null != cur ? siteService.getNhContent(Types.NEXT, cur.getCid()) : null;
     }
@@ -311,7 +317,7 @@ public final class Theme {
      *
      * @return
      */
-    public static Contents article_prev(){
+    public static Contents article_prev() {
         Contents cur = current_article();
         return null != cur ? siteService.getNhContent(Types.PREV, cur.getCid()) : null;
     }
@@ -331,6 +337,7 @@ public final class Theme {
 
     /**
      * 随机获取文章
+     *
      * @param limit
      * @return
      */
@@ -368,6 +375,7 @@ public final class Theme {
 
     /**
      * 随机获取limit个分类
+     *
      * @param limit
      * @return
      */
@@ -392,7 +400,7 @@ public final class Theme {
      *
      * @return
      */
-        public static List<MetaDto> tags(int limit) {
+    public static List<MetaDto> tags(int limit) {
         if (null == siteService) {
             return EMPTY;
         }
@@ -401,6 +409,7 @@ public final class Theme {
 
     /**
      * 随机获取limit个标签
+     *
      * @param limit
      * @return
      */
@@ -473,6 +482,7 @@ public final class Theme {
 
     /**
      * 返回文章标题
+     *
      * @param contents
      * @return
      */
@@ -482,21 +492,23 @@ public final class Theme {
 
     /**
      * 返回所有友链
+     *
      * @return
      */
-    public static List<MetaDto> links(){
+    public static List<MetaDto> links() {
         List<MetaDto> links = siteService.getMetas(Types.RECENT_META, Types.LINK, TaleConst.MAX_POSTS);
         return links;
     }
 
     /**
      * 返回社交账号链接
+     *
      * @param socialtype
      * @return
      */
     public static String social_link(String socialtype) {
         String id = Commons.site_option("social_" + socialtype);
-        switch (socialtype){
+        switch (socialtype) {
             case "github":
                 return "https://github.com/" + id;
             case "weibo":
@@ -511,13 +523,14 @@ public final class Theme {
 
     /**
      * 获取当前文章/页面的评论
+     *
      * @param limit
      * @return
      */
-    public static Paginator<Comment> comments(int limit){
+    public static Paginator<Comment> comments(int limit) {
         Contents contents = current_article();
-        if(null == contents){
-            return new Paginator<>(0,limit);
+        if (null == contents) {
+            return new Paginator<>(0, limit);
         }
         InterpretContext ctx = InterpretContext.current();
         Object value = ctx.getValueStack().getValue("cp");
@@ -549,9 +562,9 @@ public final class Theme {
      * @param value     评论组装文本
      * @return
      */
-    public static String comments_num(String noComment, String value){
+    public static String comments_num(String noComment, String value) {
         Contents contents = current_article();
-        if(null == contents){
+        if (null == contents) {
             return noComment;
         }
         return contents.getComments_num() > 0 ? String.format(value, contents.getComments_num()) : noComment;

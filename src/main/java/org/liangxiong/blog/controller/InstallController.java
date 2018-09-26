@@ -13,7 +13,6 @@ import com.blade.mvc.annotation.Route;
 import com.blade.mvc.http.HttpMethod;
 import com.blade.mvc.http.Request;
 import com.blade.mvc.view.RestResponse;
-import org.liangxiong.blog.controller.admin.AttachController;
 import org.liangxiong.blog.dto.JdbcConf;
 import org.liangxiong.blog.exception.TipException;
 import org.liangxiong.blog.ext.Commons;
@@ -26,6 +25,10 @@ import org.liangxiong.blog.utils.TaleUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * @author liangxiong
+ * @Description 网站初始化控制器
+ */
 @Controller("install")
 public class InstallController extends BaseController {
 
@@ -50,9 +53,9 @@ public class InstallController extends BaseController {
         boolean existInstall = FileKit.exist(webRoot + "install.lock");
         int isInstall = TaleConst.OPTIONS.getInt("site_is_install", 0);
         // 已经安装过
-        if(existInstall || isInstall == 1){
+        if (existInstall || isInstall == 1) {
             // 如果设置允许重新安装
-            if("1".equals(TaleConst.OPTIONS.get("allow_install", "0"))){
+            if ("1".equals(TaleConst.OPTIONS.get("allow_install", "0"))) {
                 request.attribute("is_install", false);
             } else {
                 request.attribute("is_install", true);
@@ -78,37 +81,28 @@ public class InstallController extends BaseController {
                     StringKit.isBlank(admin_pwd)) {
                 return RestResponse.fail("请确认网站信息输入完整");
             }
-
             if (StringKit.isBlank(db_host) ||
                     StringKit.isBlank(db_name) ||
                     StringKit.isBlank(db_user) ||
                     StringKit.isBlank(db_pass)) {
                 return RestResponse.fail("请确认数据库信息输入完整");
             }
-
             if (admin_pwd.length() < 6 || admin_pwd.length() > 14) {
                 return RestResponse.fail("请输入6-14位密码");
             }
-
             if (StringKit.isNotBlank(admin_email) && !TaleUtils.isEmail(admin_email)) {
                 return RestResponse.fail("邮箱格式不正确");
             }
-
-            if(!dbConn){
+            if (!dbConn) {
                 return RestResponse.fail("请检查数据库连接");
             }
-
             TaleJdbc.injection(Blade.$().ioc());
-
             Users users = new Users();
             users.setUsername(admin_user);
             users.setPassword(admin_pwd);
             users.setEmail(admin_email);
-
             JdbcConf jdbcConf = new JdbcConf(db_host, db_name, db_user, db_pass);
-
             siteService.initSite(users, jdbcConf);
-
             if (site_url.endsWith("/")) {
                 site_url = site_url.substring(0, site_url.length() - 1);
             }
@@ -147,7 +141,7 @@ public class InstallController extends BaseController {
     public RestResponse conn_test(@QueryParam String db_host, @QueryParam String db_name,
                                   @QueryParam String db_user, @QueryParam String db_pass) {
 
-        String url = "jdbc:mysql://" + db_host + "/" + db_name + "?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull";
+        String url = "jdbc:mysql://" + db_host + "/" + db_name + "?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false";
         TaleJdbc.put("url", url);
         TaleJdbc.put("username", db_user);
         TaleJdbc.put("password", db_pass);

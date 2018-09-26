@@ -2,6 +2,10 @@ package org.liangxiong.blog.service;
 
 import org.liangxiong.blog.model.Users;
 
+/**
+ * @author liangxiong
+ * @Description
+ */
 public interface UsersService {
 
     /**
@@ -14,12 +18,14 @@ public interface UsersService {
 
     /**
      * 更新用户信息
+     *
      * @param users
      */
     void update(Users users);
 
     /**
      * 用户登录
+     *
      * @param username
      * @param password
      * @return

@@ -1,7 +1,8 @@
 package org.liangxiong.blog.dto;
 
 /**
- * Created by biezhi on 2017/2/21.
+ * @author liangxiong
+ * @Description
  */
 public interface Types {
 

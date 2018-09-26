@@ -2,7 +2,7 @@ package org.liangxiong.blog.init;
 
 import com.blade.config.BConfig;
 import com.blade.kit.FileKit;
-import org.liangxiong.blog.controller.admin.AttachController;
+import org.liangxiong.blog.controller.AttachController;
 
 import java.io.File;
 import java.lang.reflect.Method;
@@ -14,7 +14,8 @@ import java.net.URLClassLoader;
 import static com.blade.Blade.$;
 
 /**
- * Created by biezhi on 2017/3/1.
+ * @author liangxiong
+ * @Description 初始化
  */
 public final class TaleLoader {
 

@@ -10,8 +10,10 @@ import com.blade.kit.FileKit;
 import com.blade.kit.StringKit;
 import com.blade.mvc.view.ViewSettings;
 import com.blade.mvc.view.template.JetbrickTemplateEngine;
+import jetbrick.template.JetGlobalContext;
+import jetbrick.template.resolver.GlobalResolver;
+import org.liangxiong.blog.controller.AttachController;
 import org.liangxiong.blog.controller.BaseController;
-import org.liangxiong.blog.controller.admin.AttachController;
 import org.liangxiong.blog.dto.Types;
 import org.liangxiong.blog.ext.AdminCommons;
 import org.liangxiong.blog.ext.Commons;
@@ -19,8 +21,6 @@ import org.liangxiong.blog.ext.JetTag;
 import org.liangxiong.blog.ext.Theme;
 import org.liangxiong.blog.service.OptionsService;
 import org.liangxiong.blog.service.SiteService;
-import jetbrick.template.JetGlobalContext;
-import jetbrick.template.resolver.GlobalResolver;
 
 import javax.servlet.ServletContext;
 import java.io.File;
@@ -31,9 +31,8 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Tale初始化进程
- *
- * @author biezhi
+ * @author liangxiong
+ * @Description 初始化
  */
 public class WebContext implements BeanProcessor, WebContextListener {
 
@@ -84,7 +83,7 @@ public class WebContext implements BeanProcessor, WebContextListener {
             BaseController.THEME = "themes/" + Commons.site_option("site_theme");
 
             String ips = TaleConst.OPTIONS.get(Types.BLOCK_IPS, "");
-            if(StringKit.isNotBlank(ips)){
+            if (StringKit.isNotBlank(ips)) {
                 TaleConst.BLOCK_IPS.addAll(Arrays.asList(StringKit.split(ips, ",")));
             }
 

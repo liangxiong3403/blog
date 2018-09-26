@@ -4,6 +4,10 @@ import com.blade.jdbc.core.Take;
 import com.blade.jdbc.model.Paginator;
 import org.liangxiong.blog.model.Contents;
 
+/**
+ * @author liangxiong
+ * @Description
+ */
 public interface ContentsService {
 
     /**
@@ -16,6 +20,7 @@ public interface ContentsService {
 
     /**
      * 根据Take条件查询分页信息
+     *
      * @param take
      * @return
      */
@@ -23,30 +28,35 @@ public interface ContentsService {
 
     /**
      * 发布文章
+     *
      * @param contents
      */
     void publish(Contents contents);
 
     /**
      * 编辑文章
+     *
      * @param contents
      */
     void updateArticle(Contents contents);
 
     /**
      * 自定义update
+     *
      * @param contents
      */
     void update(Contents contents);
 
     /**
      * 根据文章id删除
+     *
      * @param cid
      */
     void delete(int cid);
 
     /**
      * 查询分类/标签下的文章归档
+     *
      * @param mid
      * @param page
      * @param limit

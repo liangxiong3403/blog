@@ -13,7 +13,8 @@ import org.liangxiong.blog.service.LogService;
 import java.util.List;
 
 /**
- * Created by biezhi on 2017/2/26.
+ * @author liangxiong
+ * @Description
  */
 @Service
 public class LogServiceImpl implements LogService {

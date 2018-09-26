@@ -1,5 +1,9 @@
 package org.liangxiong.blog.exception;
 
+/**
+ * @author liangxiong
+ * @Description 异常管理
+ */
 public class TipException extends RuntimeException {
 
     public TipException() {

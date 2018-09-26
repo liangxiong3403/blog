@@ -2,6 +2,10 @@ package org.liangxiong.blog.service;
 
 import java.util.Map;
 
+/**
+ * @author liangxiong
+ * @Description
+ */
 public interface OptionsService {
 
     /**
@@ -13,6 +17,7 @@ public interface OptionsService {
 
     /**
      * 保存配置
+     *
      * @param key
      * @param value
      */
@@ -20,12 +25,14 @@ public interface OptionsService {
 
     /**
      * 获取系统配置
+     *
      * @return
      */
     Map<String, String> getOptions();
 
     /**
      * 根据key删除配置项
+     *
      * @param key
      */
     void deleteOption(String key);

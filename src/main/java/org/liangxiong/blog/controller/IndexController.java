@@ -13,6 +13,11 @@ import com.blade.mvc.http.Request;
 import com.blade.mvc.http.Response;
 import com.blade.mvc.http.wrapper.Session;
 import com.blade.mvc.view.RestResponse;
+import com.vdurmont.emoji.EmojiParser;
+import org.liangxiong.blog.dto.Archive;
+import org.liangxiong.blog.dto.ErrorCode;
+import org.liangxiong.blog.dto.MetaDto;
+import org.liangxiong.blog.dto.Types;
 import org.liangxiong.blog.exception.TipException;
 import org.liangxiong.blog.ext.Commons;
 import org.liangxiong.blog.init.TaleConst;
@@ -24,17 +29,16 @@ import org.liangxiong.blog.service.ContentsService;
 import org.liangxiong.blog.service.MetasService;
 import org.liangxiong.blog.service.SiteService;
 import org.liangxiong.blog.utils.TaleUtils;
-import com.vdurmont.emoji.EmojiParser;
-import org.liangxiong.blog.dto.Archive;
-import org.liangxiong.blog.dto.ErrorCode;
-import org.liangxiong.blog.dto.MetaDto;
-import org.liangxiong.blog.dto.Types;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.net.URLEncoder;
 import java.util.List;
 
+/**
+ * @author liangxiong
+ * @Description 主页控制器
+ */
 @Controller
 public class IndexController extends BaseController {
 
@@ -65,7 +69,7 @@ public class IndexController extends BaseController {
     /**
      * 自定义页面
      */
-    @Route(value = "/:pagename", method = HttpMethod.GET)
+    @Route(value = "/:pageName", method = HttpMethod.GET)
     public String page(@PathParam String pageName, Request request) {
         Contents contents = contentsService.getContents(pageName);
         if (null == contents) {
@@ -307,7 +311,7 @@ public class IndexController extends BaseController {
             return RestResponse.fail(ErrorCode.BAD_REQUEST);
         }
 
-        if(!ref.startsWith(Commons.site_url())){
+        if (!ref.startsWith(Commons.site_url())) {
             return RestResponse.fail("非法评论来源");
         }
 

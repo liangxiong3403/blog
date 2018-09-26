@@ -1,9 +1,15 @@
 package org.liangxiong.blog.utils.backup;
 
-
+/**
+ * @author liangxiong
+ * @Description
+ */
 public class Table {
+
 	private String name;
+
 	private ColumnCollection columns;
+
 	private FKCollection constraints;
 	
 	public String getName() {

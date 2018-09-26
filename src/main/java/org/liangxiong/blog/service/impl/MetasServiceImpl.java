@@ -15,6 +15,10 @@ import org.liangxiong.blog.service.MetasService;
 
 import java.util.List;
 
+/**
+ * @author liangxiong
+ * @Description
+ */
 @Service
 public class MetasServiceImpl implements MetasService {
 
@@ -105,7 +109,7 @@ public class MetasServiceImpl implements MetasService {
                             temp.setTags(reMeta(name, contents.getTags()));
                             isUpdate = true;
                         }
-                        if(isUpdate){
+                        if (isUpdate) {
                             activeRecord.update(temp);
                         }
                     }

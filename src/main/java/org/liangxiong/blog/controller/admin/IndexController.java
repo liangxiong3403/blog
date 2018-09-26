@@ -12,6 +12,7 @@ import com.blade.mvc.annotation.Route;
 import com.blade.mvc.http.HttpMethod;
 import com.blade.mvc.http.Request;
 import com.blade.mvc.view.RestResponse;
+import org.liangxiong.blog.controller.AttachController;
 import org.liangxiong.blog.controller.BaseController;
 import org.liangxiong.blog.dto.BackResponse;
 import org.liangxiong.blog.dto.LogActions;
@@ -38,8 +39,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 后台控制器
- * Created by biezhi on 2017/2/21.
+ * @author liangxiong
+ * @Description 后台管理控制器
  */
 @Controller("admin")
 public class IndexController extends BaseController {
@@ -87,8 +88,8 @@ public class IndexController extends BaseController {
         String themesDir = AttachController.CLASSPATH + "templates/themes";
         File[] themesFile = new File(themesDir).listFiles();
         List<String> themems = new ArrayList<>(themesFile.length);
-        for(File f : themesFile){
-            if(f.isDirectory()){
+        for (File f : themesFile) {
+            if (f.isDirectory()) {
                 themems.add(f.getName());
             }
         }
@@ -178,7 +179,7 @@ public class IndexController extends BaseController {
             usersService.update(temp);
             logService.save(LogActions.UP_PWD, null, request.address(), this.getUid());
             return RestResponse.ok();
-        } catch (Exception e){
+        } catch (Exception e) {
             String msg = "密码修改失败";
             if (e instanceof TipException) {
                 msg = e.getMessage();
@@ -191,6 +192,7 @@ public class IndexController extends BaseController {
 
     /**
      * 系统备份
+     *
      * @return
      */
     @Route(value = "backup", method = HttpMethod.POST)
@@ -204,7 +206,7 @@ public class IndexController extends BaseController {
             BackResponse backResponse = siteService.backup(bk_type, bk_path, "yyyyMMddHHmm");
             logService.save(LogActions.SYS_BACKUP, null, request.address(), this.getUid());
             return RestResponse.ok(backResponse);
-        } catch (Exception e){
+        } catch (Exception e) {
             String msg = "备份失败";
             if (e instanceof TipException) {
                 msg = e.getMessage();
@@ -221,7 +223,7 @@ public class IndexController extends BaseController {
      * @return
      */
     @Route(value = "advanced", method = HttpMethod.GET)
-    public String advanced(Request request){
+    public String advanced(Request request) {
         Map<String, String> options = optionsService.getOptions();
         request.attribute("options", options);
         return "admin/advanced";
@@ -229,20 +231,21 @@ public class IndexController extends BaseController {
 
     /**
      * 保存高级选项设置
+     *
      * @return
      */
     @Route(value = "advanced", method = HttpMethod.POST)
-    public String doAdvanced(@QueryParam String cache_key, @QueryParam String block_ips, @QueryParam String plugin_name){
+    public String doAdvanced(@QueryParam String cache_key, @QueryParam String block_ips, @QueryParam String plugin_name) {
         // 清除缓存
-        if(StringKit.isNotBlank(cache_key)){
-            if(cache_key.equals("*")){
+        if (StringKit.isNotBlank(cache_key)) {
+            if (cache_key.equals("*")) {
                 cache.clean();
             } else {
                 cache.del(cache_key);
             }
         }
         // 要过过滤的黑名单列表
-        if(StringKit.isNotBlank(block_ips)){
+        if (StringKit.isNotBlank(block_ips)) {
             optionsService.saveOption(Types.BLOCK_IPS, block_ips);
             TaleConst.BLOCK_IPS.addAll(Arrays.asList(StringKit.split(block_ips, ",")));
         } else {
@@ -250,10 +253,10 @@ public class IndexController extends BaseController {
             TaleConst.BLOCK_IPS.clear();
         }
         // 处理卸载插件
-        if(StringKit.isNotBlank(plugin_name)){
+        if (StringKit.isNotBlank(plugin_name)) {
             String key = "plugin_";
             // 卸载所有插件
-            if(!"*".equals(plugin_name)){
+            if (!"*".equals(plugin_name)) {
                 key = "plugin_" + plugin_name;
             } else {
                 optionsService.saveOption(Types.ATTACH_URL, Commons.site_url());

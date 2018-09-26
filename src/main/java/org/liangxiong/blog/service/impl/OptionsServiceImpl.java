@@ -12,6 +12,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author liangxiong
+ * @Description
+ */
 @Service
 public class OptionsServiceImpl implements OptionsService {
 
@@ -53,7 +57,7 @@ public class OptionsServiceImpl implements OptionsService {
 
     @Override
     public void deleteOption(String key) {
-        if(StringKit.isNotBlank(key)){
+        if (StringKit.isNotBlank(key)) {
             activeRecord.delete(new Take(Options.class).like("name", key + "%"));
         }
     }

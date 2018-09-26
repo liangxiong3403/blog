@@ -1,9 +1,8 @@
 package org.liangxiong.blog.dto;
 
 /**
- * 日志操作常量
- *
- * Created by biezhi on 2017/2/26.
+ * @author liangxiong
+ * @Description
  */
 public interface LogActions {
 

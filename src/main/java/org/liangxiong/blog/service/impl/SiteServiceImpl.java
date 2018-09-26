@@ -6,18 +6,18 @@ import com.blade.jdbc.ar.SampleActiveRecord;
 import com.blade.jdbc.core.Take;
 import com.blade.jdbc.model.Paginator;
 import com.blade.kit.*;
-import org.liangxiong.blog.controller.admin.AttachController;
+import org.liangxiong.blog.controller.AttachController;
+import org.liangxiong.blog.dto.*;
 import org.liangxiong.blog.exception.TipException;
 import org.liangxiong.blog.ext.Theme;
 import org.liangxiong.blog.init.TaleConst;
 import org.liangxiong.blog.init.TaleJdbc;
+import org.liangxiong.blog.model.*;
 import org.liangxiong.blog.service.*;
 import org.liangxiong.blog.utils.MapCache;
 import org.liangxiong.blog.utils.TaleUtils;
 import org.liangxiong.blog.utils.ZipUtils;
 import org.liangxiong.blog.utils.backup.Backup;
-import org.liangxiong.blog.dto.*;
-import org.liangxiong.blog.model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,7 +26,8 @@ import java.io.FileOutputStream;
 import java.util.*;
 
 /**
- * Created by biezhi on 2017/2/23.
+ * @author liangxiong
+ * @Description
  */
 @Service
 public class SiteServiceImpl implements SiteService {
@@ -263,7 +264,7 @@ public class SiteServiceImpl implements SiteService {
             if (CollectionKit.isNotEmpty(mids)) {
                 String in = TaleUtils.listToInSql(mids);
                 String sql = "select a.*, count(b.cid) as count from t_metas a left join `t_relationships` b on a.mid = b.mid " +
-                        "where a.mid in "+ in + "group by a.mid order by count desc, a.mid desc";
+                        "where a.mid in " + in + "group by a.mid order by count desc, a.mid desc";
                 return activeRecord.list(MetaDto.class, sql);
             }
         }
@@ -272,10 +273,10 @@ public class SiteServiceImpl implements SiteService {
 
     @Override
     public Contents getNhContent(String type, Integer cid) {
-        if(Types.NEXT.equals(type)){
+        if (Types.NEXT.equals(type)) {
             return activeRecord.one(new Take(Contents.class).eq("type", Types.ARTICLE).eq("status", Types.PUBLISH).gt("cid", cid));
         }
-        if(Types.PREV.equals(type)){
+        if (Types.PREV.equals(type)) {
             return activeRecord.one(new Take(Contents.class).eq("type", Types.ARTICLE).eq("status", Types.PUBLISH).lt("cid", cid));
         }
         return null;

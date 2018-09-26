@@ -1,6 +1,11 @@
 #include('./header.html',{has_sub:'other', active:'comments', title:'评论管理'})
+<style>
+    table thead tr th {
+        text-align: center
+    }
+</style>
 <div class="row">
-    <div class="col-sm-12">
+    <div class="col-sm-12" align="center">
         <h4 class="page-title">评论管理</h4>
     </div>
     <div class="col-md-12">
@@ -18,7 +23,7 @@
             </thead>
             <tbody>
             #for(comment : comments.list)
-            <tr cid="${comment.coid}">
+            <tr cid="${comment.coid}" align="center">
                 <td>
                     <a href="${site_url('/article/')}${comment.cid}#comments" target="_blank">${article(comment.content)}</a>
                 </td>
@@ -34,12 +39,16 @@
                     #end
                 </td>
                 <td>
-                    <a href="javascript:void(0)" onclick="reply('${comment.coid}');" class="btn btn-primary btn-sm waves-effect waves-light m-b-5"><i class="fa fa-edit"></i> <span>回复</span></a>
+                    <a href="javascript:void(0)" onclick="reply('${comment.coid}');"
+                       class="btn btn-primary btn-sm waves-effect waves-light m-b-5"><i class="fa fa-edit"></i>
+                        <span>回复</span></a>
                     #if(comment.status == 'not_audit')
-                    <a href="javascript:void(0)" onclick="updateStatus('${comment.coid}', 'approved');" class="btn btn-danger btn-sm waves-effect waves-light m-b-5"><i
+                    <a href="javascript:void(0)" onclick="updateStatus('${comment.coid}', 'approved');"
+                       class="btn btn-danger btn-sm waves-effect waves-light m-b-5"><i
                             class="fa fa-trash-o"></i> <span>通过</span></a>
                     #end
-                    <a href="javascript:void(0)" onclick="delComment(${comment.coid});" class="btn btn-danger btn-sm waves-effect waves-light m-b-5"><i class="fa fa-trash-o"></i> <span>删除</span></a>
+                    <a href="javascript:void(0)" onclick="delComment(${comment.coid});"
+                       class="btn btn-danger btn-sm waves-effect waves-light m-b-5"><i class="fa fa-trash-o"></i> <span>删除</span></a>
                 </td>
             </tr>
             #end
@@ -54,6 +63,7 @@
 <script type="text/javascript">
 
     var tale = new $.tale();
+
     function reply(coid) {
         swal({
             title: "回复评论",
@@ -66,10 +76,10 @@
             preConfirm: function (comment) {
                 return new Promise(function (resolve, reject) {
                     tale.post({
-                        url : '/admin/comments',
+                        url: '/admin/comments',
                         data: {coid: coid, content: comment},
                         success: function (result) {
-                            if(result && result.success){
+                            if (result && result.success) {
                                 tale.alertOk('已回复');
                             } else {
                                 tale.alertError(result.msg || '回复失败');
@@ -84,13 +94,13 @@
 
     function delComment(coid) {
         tale.alertConfirm({
-            title:'确定删除该评论吗?',
+            title: '确定删除该评论吗?',
             then: function () {
                 tale.post({
-                    url : '/admin/comments/delete',
+                    url: '/admin/comments/delete',
                     data: {coid: coid},
                     success: function (result) {
-                        if(result && result.success){
+                        if (result && result.success) {
                             tale.alertOkAndReload('评论删除成功');
                         } else {
                             tale.alertError(result.msg || '评论删除失败');
@@ -103,10 +113,10 @@
 
     function updateStatus(coid, status) {
         tale.post({
-            url : '/admin/comments/status',
+            url: '/admin/comments/status',
             data: {coid: coid, status: status},
             success: function (result) {
-                if(result && result.success){
+                if (result && result.success) {
                     tale.alertOkAndReload('评论状态设置成功');
                 } else {
                     tale.alertError(result.msg || '评论设置失败');

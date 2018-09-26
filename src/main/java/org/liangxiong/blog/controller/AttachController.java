@@ -1,4 +1,4 @@
-package org.liangxiong.blog.controller.admin;
+package org.liangxiong.blog.controller;
 
 import com.blade.ioc.annotation.Inject;
 import com.blade.jdbc.core.Take;
@@ -13,7 +13,6 @@ import com.blade.mvc.http.HttpMethod;
 import com.blade.mvc.http.Request;
 import com.blade.mvc.multipart.FileItem;
 import com.blade.mvc.view.RestResponse;
-import org.liangxiong.blog.controller.BaseController;
 import org.liangxiong.blog.dto.LogActions;
 import org.liangxiong.blog.dto.Types;
 import org.liangxiong.blog.exception.TipException;
@@ -36,9 +35,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 附件管理
- *
- * Created by biezhi on 2017/2/21.
+ * @author liangxiong
+ * @Description 附件管理控制器
  */
 @Controller("admin/attach")
 public class AttachController extends BaseController {
@@ -95,7 +93,7 @@ public class AttachController extends BaseController {
             fileItems.forEach((FileItem f) -> {
                 String fname = f.fileName();
 
-                if(f.file().length() / 1024 <= TaleConst.MAX_FILE_SIZE){
+                if (f.file().length() / 1024 <= TaleConst.MAX_FILE_SIZE) {
                     String fkey = TaleUtils.getFileKey(fname);
                     String ftype = TaleUtils.isImage(f.file()) ? Types.IMAGE : Types.FILE;
                     String filePath = TaleUtils.upDir + fkey;

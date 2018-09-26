@@ -1,4 +1,4 @@
-package org.liangxiong.blog.controller.admin;
+package org.liangxiong.blog.controller;
 
 import com.blade.ioc.annotation.Inject;
 import com.blade.mvc.annotation.Controller;
@@ -8,7 +8,6 @@ import com.blade.mvc.annotation.Route;
 import com.blade.mvc.http.HttpMethod;
 import com.blade.mvc.http.Request;
 import com.blade.mvc.view.RestResponse;
-import org.liangxiong.blog.controller.BaseController;
 import org.liangxiong.blog.dto.Types;
 import org.liangxiong.blog.exception.TipException;
 import org.liangxiong.blog.model.Metas;
@@ -20,7 +19,8 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 
 /**
- * Created by biezhi on 2017/2/21.
+ * @author liangxiong
+ * @Description 友情连接控制器
  */
 @Controller("admin/links")
 public class LinksController extends BaseController {

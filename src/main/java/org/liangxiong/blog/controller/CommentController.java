@@ -1,4 +1,4 @@
-package org.liangxiong.blog.controller.admin;
+package org.liangxiong.blog.controller;
 
 import com.blade.ioc.annotation.Inject;
 import com.blade.jdbc.core.Take;
@@ -11,7 +11,7 @@ import com.blade.mvc.annotation.Route;
 import com.blade.mvc.http.HttpMethod;
 import com.blade.mvc.http.Request;
 import com.blade.mvc.view.RestResponse;
-import org.liangxiong.blog.controller.BaseController;
+import com.vdurmont.emoji.EmojiParser;
 import org.liangxiong.blog.dto.Types;
 import org.liangxiong.blog.exception.TipException;
 import org.liangxiong.blog.model.Comments;
@@ -19,12 +19,12 @@ import org.liangxiong.blog.model.Users;
 import org.liangxiong.blog.service.CommentsService;
 import org.liangxiong.blog.service.SiteService;
 import org.liangxiong.blog.utils.TaleUtils;
-import com.vdurmont.emoji.EmojiParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Created by biezhi on 2017/2/26.
+ * @author liangxiong
+ * @Description 文章评论管理控制器
  */
 @Controller("admin/comments")
 public class CommentController extends BaseController {
@@ -48,6 +48,7 @@ public class CommentController extends BaseController {
 
     /**
      * 删除一条评论
+     *
      * @param coid
      * @return
      */
@@ -56,7 +57,7 @@ public class CommentController extends BaseController {
     public RestResponse delete(@QueryParam Integer coid) {
         try {
             Comments comments = commentsService.byId(coid);
-            if(null == comments){
+            if (null == comments) {
                 return RestResponse.fail("不存在该评论");
             }
             commentsService.delete(coid, comments.getCid());
@@ -97,15 +98,15 @@ public class CommentController extends BaseController {
     @Route(value = "", method = HttpMethod.POST)
     @JSON
     public RestResponse reply(@QueryParam Integer coid, @QueryParam String content, Request request) {
-        if(null == coid || StringKit.isBlank(content)){
+        if (null == coid || StringKit.isBlank(content)) {
             return RestResponse.fail("请输入完整后评论");
         }
 
-        if(content.length() > 2000){
+        if (content.length() > 2000) {
             return RestResponse.fail("请输入2000个字符以内的回复");
         }
         Comments c = commentsService.byId(coid);
-        if(null == c){
+        if (null == c) {
             return RestResponse.fail("不存在该评论");
         }
         Users users = this.user();
@@ -119,7 +120,7 @@ public class CommentController extends BaseController {
         comments.setIp(request.address());
         comments.setUrl(users.getHome_url());
         comments.setContent(content);
-        if(StringKit.isNotBlank(users.getEmail())){
+        if (StringKit.isNotBlank(users.getEmail())) {
             comments.setMail(users.getEmail());
         } else {
             comments.setMail("support@tale.me");

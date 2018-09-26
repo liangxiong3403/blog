@@ -1,4 +1,4 @@
-package org.liangxiong.blog.controller.admin;
+package org.liangxiong.blog.controller;
 
 import com.blade.ioc.annotation.Inject;
 import com.blade.jdbc.core.Take;
@@ -7,7 +7,6 @@ import com.blade.mvc.annotation.*;
 import com.blade.mvc.http.HttpMethod;
 import com.blade.mvc.http.Request;
 import com.blade.mvc.view.RestResponse;
-import org.liangxiong.blog.controller.BaseController;
 import org.liangxiong.blog.dto.LogActions;
 import org.liangxiong.blog.dto.Types;
 import org.liangxiong.blog.exception.TipException;
@@ -22,7 +21,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Created by biezhi on 2017/2/21.
+ * @author liangxiong
+ * @Description 页面管理控制器
  */
 @Controller("admin/page")
 public class PageController extends BaseController {
@@ -138,7 +138,7 @@ public class PageController extends BaseController {
         try {
             contentsService.delete(cid);
             siteService.cleanCache(Types.C_STATISTICS);
-            logService.save(LogActions.DEL_PAGE, cid+"", request.address(), this.getUid());
+            logService.save(LogActions.DEL_PAGE, cid + "", request.address(), this.getUid());
         } catch (Exception e) {
             String msg = "页面删除失败";
             if (e instanceof TipException) {

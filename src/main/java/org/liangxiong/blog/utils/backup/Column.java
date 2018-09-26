@@ -1,29 +1,23 @@
 package org.liangxiong.blog.utils.backup;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.ToString;
+
+/**
+ * @author liangxiong
+ * @Description
+ */
+@Getter
+@AllArgsConstructor
+@ToString
 public class Column {
-	private String name;
-	private String typeName;
-	private int dataType;
 
-	public String getName() {
-		return name;
-	}
+    private String name;
 
-	public int getDataType() {
-		return dataType;
-	}
-	
-	public Column(String name, String typeName, int dataType) {
-		super();
-		this.name = name;
-		this.typeName = typeName;
-		this.dataType = dataType;
-	}
+    private String typeName;
 
-	@Override
-	public String toString() {
-		return "Column [name=" + name + ", typeName=" + typeName
-				+ ", dataType=" + dataType + "]";
-	}
+    private int dataType;
+
 
 }

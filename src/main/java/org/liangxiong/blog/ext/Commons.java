@@ -2,11 +2,11 @@ package org.liangxiong.blog.ext;
 
 import com.blade.jdbc.model.Paginator;
 import com.blade.kit.*;
+import com.vdurmont.emoji.EmojiParser;
 import org.liangxiong.blog.controller.BaseController;
 import org.liangxiong.blog.init.TaleConst;
 import org.liangxiong.blog.service.SiteService;
 import org.liangxiong.blog.utils.TaleUtils;
-import com.vdurmont.emoji.EmojiParser;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,9 +16,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * 公共函数
- * <p>
- * Created by biezhi on 2017/2/21.
+ * @author liangxiong
+ * @Description 公共函数
  */
 public final class Commons {
 
@@ -27,7 +26,7 @@ public final class Commons {
     private static final List EMPTY = new ArrayList(0);
 
     private static final Random rand = new Random();
-    
+
     private static final String TEMPLATES = "/templates/";
 
     public static void setSiteService(SiteService ss) {
@@ -99,9 +98,10 @@ public final class Commons {
 
     /**
      * 返回站点设置的描述信息
+     *
      * @return
      */
-    public static String site_description(){
+    public static String site_description() {
         return site_option("site_description");
     }
 
@@ -166,6 +166,7 @@ public final class Commons {
 
     /**
      * 格式化日期
+     *
      * @param date
      * @param fmt
      * @return
@@ -190,23 +191,24 @@ public final class Commons {
 
     /**
      * 获取随机数
+     *
      * @param max
      * @param str
      * @return
      */
-    public static String random(int max, String str){
+    public static String random(int max, String str) {
         return UUID.random(1, max) + str;
     }
 
     /**
      * An :grinning:awesome :smiley:string &#128516;with a few :wink:emojis!
-     *
+     * <p>
      * 这种格式的字符转换为emoji表情
      *
      * @param value
      * @return
      */
-    public static String emoji(String value){
+    public static String emoji(String value) {
         return EmojiParser.parseToUnicode(value);
     }
 

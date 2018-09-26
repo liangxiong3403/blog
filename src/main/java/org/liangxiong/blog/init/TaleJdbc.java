@@ -18,8 +18,8 @@ import java.sql.DriverManager;
 import java.util.Properties;
 
 /**
- * 数据库操作
- * Created by biezhi on 2017/2/23.
+ * @author liangxiong
+ * @Description 数据库操作
  */
 public final class TaleJdbc {
 
@@ -106,7 +106,7 @@ public final class TaleJdbc {
     public static void testConn() {
         if (jdbc_prop.containsKey("url") && jdbc_prop.containsKey("username") && jdbc_prop.containsKey("password")) {
             try {
-                Class.forName("com.mysql.jdbc.Driver"); //MYSQL驱动
+                Class.forName("com.mysql.jdbc.Driver");
                 Connection con = DriverManager.getConnection(jdbc_prop.getProperty("url"), jdbc_prop.getProperty("username"), jdbc_prop.getProperty("password"));
                 ScriptRunner runner = new ScriptRunner(con, false, true);
                 String cp = TaleJdbc.class.getClassLoader().getResource("").getPath();

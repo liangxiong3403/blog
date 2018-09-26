@@ -10,7 +10,8 @@ import org.liangxiong.blog.model.Attach;
 import org.liangxiong.blog.service.AttachService;
 
 /**
- * Created by biezhi on 2017/2/23.
+ * @author liangxiong
+ * @Description
  */
 @Service
 public class AttachServiceImpl implements AttachService {
@@ -31,7 +32,7 @@ public class AttachServiceImpl implements AttachService {
 
     @Override
     public Attach byId(Integer id) {
-        if(null != id){
+        if (null != id) {
             return activeRecord.byId(Attach.class, id);
         }
         return null;

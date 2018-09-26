@@ -1,15 +1,21 @@
 package org.liangxiong.blog.dto;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.liangxiong.blog.model.Comments;
 
 import java.util.List;
 
 /**
- * Created by biezhi on 2017/2/24.
+ * @author liangxiong
+ * @Description
  */
+@Getter
+@Setter
 public class Comment extends Comments {
 
     private int levels;
+
     private List<Comments> children;
 
     public Comment(Comments comments) {
@@ -26,19 +32,4 @@ public class Comment extends Comments {
         setCid(comments.getCid());
     }
 
-    public int getLevels() {
-        return levels;
-    }
-
-    public void setLevels(int levels) {
-        this.levels = levels;
-    }
-
-    public List<Comments> getChildren() {
-        return children;
-    }
-
-    public void setChildren(List<Comments> children) {
-        this.children = children;
-    }
 }

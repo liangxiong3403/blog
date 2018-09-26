@@ -17,6 +17,10 @@ import org.liangxiong.blog.utils.TaleUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * @author liangxiong
+ * @Description 拦截器
+ */
 @Intercept
 public class BaseInterceptor implements Interceptor {
 
@@ -34,7 +38,7 @@ public class BaseInterceptor implements Interceptor {
         String ip = IPKit.getIpAddrByRequest(request.raw());
 
         // 禁止该ip访问
-        if(TaleConst.BLOCK_IPS.contains(ip)){
+        if (TaleConst.BLOCK_IPS.contains(ip)) {
             response.text("You have been banned, brother");
             return false;
         }
@@ -57,8 +61,8 @@ public class BaseInterceptor implements Interceptor {
                 }
             }
 
-            if(uri.startsWith("/admin") && !uri.startsWith("/admin/login")){
-                if(null == user){
+            if (uri.startsWith("/admin") && !uri.startsWith("/admin/login")) {
+                if (null == user) {
                     response.go("/admin/login");
                     return false;
                 }
@@ -66,7 +70,7 @@ public class BaseInterceptor implements Interceptor {
             }
         }
         String method = request.method();
-        if(method.equals("GET")){
+        if (method.equals("GET")) {
             String csrf_token = UUID.UU64();
             // 默认存储30分钟
             cache.hset(Types.CSRF_TOKEN, csrf_token, uri, TaleConst.BCONF.getInt("app.csrf-token-timeout", 30) * 60);
@@ -79,7 +83,7 @@ public class BaseInterceptor implements Interceptor {
     @Override
     public boolean after(Request request, Response response) {
         String _csrf_token = request.query("_csrf_token");
-        if(StringKit.isNotBlank(_csrf_token)){
+        if (StringKit.isNotBlank(_csrf_token)) {
             // 移除本次token
             cache.hdel(Types.CSRF_TOKEN, _csrf_token);
         }

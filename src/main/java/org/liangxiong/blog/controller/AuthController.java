@@ -1,4 +1,4 @@
-package org.liangxiong.blog.controller.admin;
+package org.liangxiong.blog.controller;
 
 import com.blade.ioc.annotation.Inject;
 import com.blade.kit.DateKit;
@@ -12,7 +12,6 @@ import com.blade.mvc.http.Request;
 import com.blade.mvc.http.Response;
 import com.blade.mvc.http.wrapper.Session;
 import com.blade.mvc.view.RestResponse;
-import org.liangxiong.blog.controller.BaseController;
 import org.liangxiong.blog.dto.LogActions;
 import org.liangxiong.blog.exception.TipException;
 import org.liangxiong.blog.init.TaleConst;
@@ -24,8 +23,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * 登录，退出
- * Created by biezhi on 2017/2/21.
+ * @author liangxiong
+ * @Description 访问权限控制器
  */
 @Controller("admin")
 public class AuthController extends BaseController {
@@ -40,7 +39,7 @@ public class AuthController extends BaseController {
 
     @Route(value = "login", method = HttpMethod.GET)
     public String login(Response response) {
-        if(null != this.user()){
+        if (null != this.user()) {
             response.go("/admin/index");
             return null;
         }
@@ -69,7 +68,7 @@ public class AuthController extends BaseController {
             logService.save(LogActions.LOGIN, null, request.address(), user.getUid());
         } catch (Exception e) {
             error_count = null == error_count ? 1 : error_count + 1;
-            if(null != error_count && error_count > 3){
+            if (null != error_count && error_count > 3) {
                 return RestResponse.fail("您输入密码已经错误超过3次，请10分钟后尝试");
             }
             cache.set("login_error_count", error_count, 10 * 60);
