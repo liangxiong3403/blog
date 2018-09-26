@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8"/>
-    <title>${title ?! '博客后台'} - Tale</title>
+    <title>${title ?! '博客后台'} - Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <meta content="Coderthemes" name="author"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -26,11 +26,11 @@
             <div class="text-center p-t-10" style="margin: 0 auto;">
                 <div class="pull-left" style="padding-left: 10px;">
                     <a href="/admin/index">
-                        <img src="/static/admin/images/unicorn.png" width="50" height="50"/>
+                        <img src="/static/admin/images/buliangshuai.jpg" width="50" height="50"/>
                     </a>
                 </div>
                 <div class="pull-left" style="padding-left: 10px;">
-                    <span style="font-size: 28px; color: #2f353f; line-height: 50px;">Tale Blog</span>
+                    <span style="font-size: 28px; color: #2f353f; line-height: 50px;">Blog</span>
                 </div>
             </div>
         </div>
@@ -47,7 +47,7 @@
                     <ul class="nav navbar-nav navbar-right pull-right">
                         <li class="dropdown">
                             <a href="index.html" class="dropdown-toggle profile" data-toggle="dropdown"
-                               aria-expanded="true"><img src="${gravatar(login_user.email)}" alt="user-img" class="img-circle"> </a>
+                               aria-expanded="true"><img src="/static/admin/images/logout.png" alt="user-img" class="img-circle" title="退出系统"> </a>
                             <ul class="dropdown-menu">
                                 <li><a href="${site_url()}" target="_blank"><i class="fa fa-eye" aria-hidden="true"></i> 博客首页</a></li>
                                 <li><a href="/admin/profile"><i class="fa fa-sun-o"></i> 个人设置</a></li>
