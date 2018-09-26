@@ -18,5 +18,8 @@
 WebContent/.idea/
 .project
 /bin/
-*/target
+target/*
 pom.xml.versionsBackup
+.gitattributes
+.travis.yml
+
