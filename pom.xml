@@ -84,11 +84,17 @@
     <profiles>
         <profile>
             <id>prod</id>
+            <properties>
+                <profiles.active>prod</profiles.active>
+            </properties>
             <build>
                 <resources>
                     <resource>
                         <directory>src/main/java</directory>
                         <filtering>false</filtering>
+                        <excludes>
+                            <exclude>**/*.java</exclude>
+                        </excludes>
                     </resource>
                     <!-- 把放在根目录下的脚本文件.sh,.bat拷贝到bin目录中 -->
                     <resource>
@@ -104,6 +110,12 @@
         </profile>
         <profile>
             <id>dev</id>
+            <properties>
+                <profiles.active>dev</profiles.active>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
             <build>
                 <resources>
                     <resource>
@@ -115,7 +127,7 @@
                         <filtering>false</filtering>
                     </resource>
                     <resource>
-                        <directory>src/main/test</directory>
+                        <directory>src/test/java</directory>
                         <filtering>false</filtering>
                     </resource>
                     <resource>
@@ -142,10 +154,19 @@
                 <configuration>
                     <appendAssemblyId>false</appendAssemblyId>
                     <descriptors>
-                        <descriptor>assembly.xml</descriptor>
+                        <descriptor>package.xml</descriptor>
                     </descriptors>
                     <outputDirectory>${project.build.directory}/dist/</outputDirectory>
                 </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -162,9 +183,6 @@
                             <Class-Path>resources/</Class-Path>
                         </manifestEntries>
                     </archive>
-                    <excludes>
-                        <exclude>*.java</exclude>
-                    </excludes>
                 </configuration>
             </plugin>
         </plugins>

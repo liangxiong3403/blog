@@ -1,7 +1,11 @@
 #include('./header.html',{has_sub:'other', active:'comments', title:'评论管理'})
 <style>
-    table thead tr th {
-        text-align: center
+    table tr th {
+        text-align: center;
+    }
+
+    .table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {
+        vertical-align: middle;
     }
 </style>
 <div class="row">
@@ -47,6 +51,7 @@
                        class="btn btn-danger btn-sm waves-effect waves-light m-b-5"><i
                             class="fa fa-trash-o"></i> <span>通过</span></a>
                     #end
+                    &nbsp;
                     <a href="javascript:void(0)" onclick="delComment(${comment.coid});"
                        class="btn btn-danger btn-sm waves-effect waves-light m-b-5"><i class="fa fa-trash-o"></i> <span>删除</span></a>
                 </td>
