@@ -5,19 +5,15 @@
             <a href="${permalink()}">${title()}</a>
         </h1>
         <div class="post-data">
-            <time datetime="${created('yyyy-MM-dd')}" itemprop="datePublished">发布于 ${created('yyyy-MM-dd')}</time>
-            / ${show_categories()} / <a href="#comments">${comments_num('没有评论', '%d 条评论')}</a> /
-            ${hits()}浏览
+            <time datetime="${created('yyyy-MM-dd')}" itemprop="datePublished">博客发布时间:&nbsp; ${created('yyyy-MM-dd')}
+            </time>
+            &nbsp;&nbsp;${show_categories()} &nbsp; <a href="#comments">${comments_num('没有评论', '%d 条评论')}</a> &nbsp;&nbsp;
+            浏览量:&nbsp;${hits()}&nbsp;&nbsp;最新修改:&nbsp;${modified('yyyy-MM-dd HH:mm:00')}
         </div>
     </div>
     <div id="post-content" class="post-content" itemprop="articleBody">
         <p class="post-tags">${show_tags()}</p>
         ${show_content()}
-        <p class="post-info">
-            本文由 <a href="">biezhi</a> 创作，采用 <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank"
-                                               rel="external nofollow">知识共享署名4.0</a> 国际许可协议进行许可<br>本站文章除注明转载/出处外，均为本站原创或翻译，转载前请务必署名<br>最后编辑时间为:
-            ${modified('yyyy/MM/dd HH:mm')}
-        </p>
     </div>
 </article>
 #include('./comments.html')
