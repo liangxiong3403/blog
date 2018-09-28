@@ -14,6 +14,7 @@ import org.liangxiong.blog.init.TaleConst;
 import org.liangxiong.blog.init.TaleJdbc;
 import org.liangxiong.blog.model.*;
 import org.liangxiong.blog.service.*;
+import org.liangxiong.blog.utils.DateUtil;
 import org.liangxiong.blog.utils.MapCache;
 import org.liangxiong.blog.utils.TaleUtils;
 import org.liangxiong.blog.utils.ZipUtils;
@@ -56,7 +57,7 @@ public class SiteServiceImpl implements SiteService {
         String pwd = Tools.md5(users.getUsername() + users.getPassword());
         users.setPassword(pwd);
         users.setScreen_name(users.getUsername());
-        users.setCreated(DateKit.getCurrentUnixTime());
+        users.setCreated(DateUtil.getUTC8Time());
         Long uid = activeRecord.insert(users);
 
         try {

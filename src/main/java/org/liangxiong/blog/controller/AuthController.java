@@ -18,6 +18,7 @@ import org.liangxiong.blog.init.TaleConst;
 import org.liangxiong.blog.model.Users;
 import org.liangxiong.blog.service.LogService;
 import org.liangxiong.blog.service.UsersService;
+import org.liangxiong.blog.utils.DateUtil;
 import org.liangxiong.blog.utils.TaleUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -63,7 +64,7 @@ public class AuthController extends BaseController {
             }
             Users temp = new Users();
             temp.setUid(user.getUid());
-            temp.setLogged(DateKit.getCurrentUnixTime());
+            temp.setLogged(DateUtil.getUTC8Time());
             usersService.update(temp);
             logService.save(LogActions.LOGIN, null, request.address(), user.getUid());
         } catch (Exception e) {

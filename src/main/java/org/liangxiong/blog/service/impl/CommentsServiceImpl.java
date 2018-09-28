@@ -14,6 +14,7 @@ import org.liangxiong.blog.model.Comments;
 import org.liangxiong.blog.model.Contents;
 import org.liangxiong.blog.service.CommentsService;
 import org.liangxiong.blog.service.ContentsService;
+import org.liangxiong.blog.utils.DateUtil;
 import org.liangxiong.blog.utils.TaleUtils;
 
 import java.util.ArrayList;
@@ -61,7 +62,7 @@ public class CommentsServiceImpl implements CommentsService {
         }
         try {
             comments.setOwner_id(contents.getAuthor_id());
-            comments.setCreated(DateKit.getCurrentUnixTime());
+            comments.setCreated(DateUtil.getUTC8Time());
             activeRecord.insert(comments);
 
             Contents temp = new Contents();

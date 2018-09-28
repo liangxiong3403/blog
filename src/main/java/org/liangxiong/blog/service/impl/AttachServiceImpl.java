@@ -5,9 +5,9 @@ import com.blade.ioc.annotation.Service;
 import com.blade.jdbc.ActiveRecord;
 import com.blade.jdbc.core.Take;
 import com.blade.jdbc.model.Paginator;
-import com.blade.kit.DateKit;
 import org.liangxiong.blog.model.Attach;
 import org.liangxiong.blog.service.AttachService;
+import org.liangxiong.blog.utils.DateUtil;
 
 /**
  * @author liangxiong
@@ -26,7 +26,7 @@ public class AttachServiceImpl implements AttachService {
         attach.setAuthor_id(author);
         attach.setFkey(fkey);
         attach.setFtype(ftype);
-        attach.setCreated(DateKit.getCurrentUnixTime());
+        attach.setCreated(DateUtil.getUTC8Time());
         activeRecord.insert(attach);
     }
 

@@ -5,10 +5,10 @@ import com.blade.ioc.annotation.Service;
 import com.blade.jdbc.ActiveRecord;
 import com.blade.jdbc.core.Take;
 import com.blade.jdbc.model.Paginator;
-import com.blade.kit.DateKit;
 import org.liangxiong.blog.init.TaleConst;
 import org.liangxiong.blog.model.Logs;
 import org.liangxiong.blog.service.LogService;
+import org.liangxiong.blog.utils.DateUtil;
 
 import java.util.List;
 
@@ -29,7 +29,7 @@ public class LogServiceImpl implements LogService {
         logs.setData(data);
         logs.setIp(ip);
         logs.setAuthor_id(author_id);
-        logs.setCreated(DateKit.getCurrentUnixTime());
+        logs.setCreated(DateUtil.getUTC8Time());
         activeRecord.insert(logs);
     }
 

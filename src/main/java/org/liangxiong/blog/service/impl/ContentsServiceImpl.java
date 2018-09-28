@@ -6,7 +6,6 @@ import com.blade.jdbc.ActiveRecord;
 import com.blade.jdbc.core.Take;
 import com.blade.jdbc.model.PageRow;
 import com.blade.jdbc.model.Paginator;
-import com.blade.kit.DateKit;
 import com.blade.kit.StringKit;
 import com.vdurmont.emoji.EmojiParser;
 import org.liangxiong.blog.dto.Types;
@@ -14,6 +13,7 @@ import org.liangxiong.blog.exception.TipException;
 import org.liangxiong.blog.model.Contents;
 import org.liangxiong.blog.service.ContentsService;
 import org.liangxiong.blog.service.MetasService;
+import org.liangxiong.blog.utils.DateUtil;
 import org.liangxiong.blog.utils.TaleUtils;
 
 import java.util.List;
@@ -82,7 +82,7 @@ public class ContentsServiceImpl implements ContentsService {
 
         contents.setContent(EmojiParser.parseToAliases(contents.getContent()));
 
-        int time = DateKit.getCurrentUnixTime();
+        int time = DateUtil.getUTC8Time();
         contents.setCreated(time);
         contents.setModified(time);
 
@@ -116,7 +116,7 @@ public class ContentsServiceImpl implements ContentsService {
         if (null == contents.getAuthor_id()) {
             throw new TipException("请登录后发布文章");
         }
-        int time = DateKit.getCurrentUnixTime();
+        int time = DateUtil.getUTC8Time();
         contents.setModified(time);
 
         Integer cid = contents.getCid();
